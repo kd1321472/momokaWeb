@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ももちがちゃ</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: "Comic Sans MS", cursive;
+            background-color: #f3f0e0;
+            padding: 10px; /* ページ全体のパディングを追加 */
+        }
+        h1 {
+            font-size: 48px; /* タイトルのフォントサイズを大きくする */
+            color: #ff6b6b; /* タイトルの色を変更する */
+            font-family: 'Pacifico', cursive; /* "Pacifico"フォントを適用 */
+            margin-top: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 20px;
+            background-color: #ffec6b;
+            color: #ffffff;
+            border: none;
+            cursor: pointer;
+            border-radius: 10px;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #c3ff68;
+        }
+        #output {
+            margin-top: 20px;
+            font-size: 24px;
+            color: #ffcc80;
+            padding: 10px;
+            border-radius: 10px;
+            background-color: #ffffff; /* 白色の背景を追加 */
+        }
+
+        /* スマートフォン用のスタイル */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 36px; /* スマートフォン用にフォントサイズを調整 */
+            }
+            button {
+                font-size: 16px; /* スマートフォン用にフォントサイズを調整 */
+            }
+            #output {
+                font-size: 18px; /* スマートフォン用にフォントサイズを調整 */
+            }
+
+            
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0; /* 透明状態からスタート */
+            }
+            to {
+                opacity: 1; /* 完全に表示される状態へ */
+            }
+        }
+
+        #output {
+            /* 既存のスタイルは省略 */
+            animation: fadeIn 0.5s ease-in; /* fadeInアニメーションを適用 */
+        }
+
+              @keyframes slideIn {
+            from {
+                transform: translateX(100%); /* 右端からスタート */
+                color: transparent; /* 透明状態からスタート */
+            }
+            to {
+                transform: translateX(0); /* 左端まで移動 */
+                color: #ffcc80; /* オレンジ色に変更 */
+            }
+        }
+
+        #output {
+            /* 既存のスタイルは省略 */
+            animation: slideIn 0.5s ease-in; /* slideInアニメーションを適用 */
+        }
+    </style>
+    <!-- Google FontsからPacificoフォントを読み込む -->
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+</head>
+<body>
+    <h1>ももちのいいところがちゃ</h1>
+    <button id="gachaButton">ガチャを引く</button>
+    <div id="output"></div>
+
+    <script>
+        // ガチャアイテムの配列
+        const gachaItems = ["笑顔が素敵",
+         "おめめぱっちり二重さんでかわいい",
+         "まつげバサバサで美しい",
+         "お口が柔らかくて、綺麗なピンク色",
+         "歯並びが良い",
+         "顔のパーツ配置が良い",
+         "ちょうどいい鼻の高さ",
+         "しっかり愛情表現できて素敵",
+         "長文LINEを送るほどマメ",
+         "包み込むような包容力",
+         "好きなことに対して熱心",
+         "素直で素敵",
+         "努力してて素敵",
+         "人のいいところを見つけるのが得意",
+         "声が素敵なところ",
+         "くびれがあってスタイルがいい",
+         "足がよい",
+         "一緒に布団に入るとあったかい",
+         "おててがかわいい",
+         "肌綺麗、美顔！",
+         "思いやりがあって優しい",
+         "友達や家族のことを大切にしている",
+         "甘えるときの高い声がかわいい",
+         "まじめな話してる時の低い声がももちゃんらしくていい",
+         "独特な言葉を作るところがかわいい",
+         "話が面白い",
+         "まじめなところ",
+         "人の気持ちを考えれるところ",
+         "笑顔が素敵",
+         "頭いい！",
+         "運動ができちゃう！",
+         "素直なところ",
+         "何気ない仕草がかわいい",
+         "字がまるっこくてかわいい",
+         "ハグすると細い",
+         "髪型かわいい",
+         "髪質がよい",
+         "抜けてるところがあるところ",
+         "お部屋が汚いのギャップでかわいい",
+         "手汗が出てかわいい",
+         "面食いじゃないところ",
+         "人のために泣けるところ",
+         "へび舌でかわいい",
+         "食べ物をシェアしてくれるところ",
+         "コミュ力があるところ",
+         "金銭感覚がしっかりしてる",
+         "常識がある",
+         "寝顔がかわいい",
+         "規則正しいところ",
+         "絵がうまいところ",
+         "好きなものがちゃんとあって、語れるところ",
+         "妄想力がある",
+         "力が意外と強いところ",
+         "インドアでもアウトドアでもいけるところ",
+         "LINEの返信が早い",
+         "ご飯を食べるのがはやい",
+         "ペンの持ち方がかわいい",
+         "制服が似合ってる",
+         "あふれでるお姉さん感"
+        ];
+
+        // ガチャボタンの要素を取得
+        const gachaButton = document.getElementById("gachaButton");
+
+        // ガチャ結果を表示する要素を取得
+        const outut = document.getElementById("output");
+
+        // ガチャを引く処理
+        function pullGacha() {
+            const randomIndex = Math.floor(Math.random() * gachaItems.length);
+            const selectedItem = gachaItems[randomIndex];
+            output.textContent = selectedItem;
+        }
+
+        // ガチャボタンにクリックイベントリスナーを追加
+        gachaButton.addEventListener("click", pullGacha);
+    </script>
+</body>
+</html>
